@@ -1,0 +1,116 @@
+
+
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div data-original-title="" class="box-header well"><!-- <i class="icon-user"></i> <a href="add" class=""></a>{$pageTitle}--></div>
+        <div class="box-content">
+            <form method='get' action="{:url('index')}"  class="form-inline">
+                  <div class="form-group" >
+    <label for="id"> 编号</label>
+    
+       <input  class="form-control" name="id" type="text" id="id" size="10" value="{$vo[id] ? $vo[id] : $_GET[id]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="username"> 用户名</label>
+    
+       <input  class="form-control" name="username" type="text" id="username" size="30" value="{$vo[username] ? $vo[username] : $_GET[username]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="email"> 邮箱</label>
+    
+       <input  class="form-control" name="email" type="text" id="email" size="30" value="{$vo[email] ? $vo[email] : $_GET[email]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="birthday"> 生日</label>
+    
+       <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="birthday" name="birthday" size="30" placeholder=" - "
+                               value="{$Think.get.create_t}">
+                    </div>
+        <script>
+            laydate.render({
+                elem: '#birthday', 
+                type: 'date',
+                
+
+            });
+        </script>
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="status"> 状态</label>
+    
+       <html:select  first="请选择" options='opt_status' selected='status_selected' name="status" />
+       </div>
+   
+
+
+		      <button type="submit" class="btn btn-primary">搜索</button>
+		    </form>
+            <br />
+            <php>  $query = strstr($_SERVER["REQUEST_URI"],'?');    </php>
+
+            <php>if(0==1){</php>
+            <a href="{:url('add')}" type="button" class="btn btn-warning">添加</a>
+            <php>}</php>
+
+
+            <php>if(0==1){</php>
+            <a href="{:url('exportExcel')}" type="button" class="btn btn-warning">导出</a>
+            <php>}</php>
+
+
+           <!-- show="id:编号|8%,title:名称:edit,create_time|toDate='y-m-d':创建时间,status|getStatus2:状态,{$fields}"-->
+            <html:list id="checkList" name="vo" style="table table-striped table-bordered bootstrap-datatable datatable" checkbox="true" action="true"  datasource="list" show="id:编号::sort,username:用户名::sort,email:邮箱::sort,birthday:生日::sort,status_text:状态,create_time:创建时间::sort" actionlist="user_编辑:id,user_查看用户浏览记录:id"/>
+            <div>
+                <php>if(0==1){</php>
+                <a href="javascript:;" onclick="del();" class="btn btn-info"> 批量禁用</a>
+                <php>}</php>
+
+                <php>if(0==1){</php>
+                <a href="javascript:;" onclick="foreverdel();" class="btn btn-danger"> 批量删除</a>
+                <php>}</php>
+            </div>
+            <div class="container text-center">
+                {$page}
+                <div style="margin-top:10px;">跳转到<input type="text" style="width: 100px;" id="txt_page" name="txt_page" >页 <input id="btn_jump" type="button" value="跳转"></div>
+                </div>
+ 
+        </div>
+    </div>
+
+</div>
+
+<script src="__PUBLIC__/common/User.js"></script>
+
+<script>
+    <php>
+        $params = input('get.');
+        unset($params['p']);
+        $params = http_build_query($params);
+    </php>
+
+        $(function () {
+            console.log(URL);
+
+            $('#btn_jump').click(function () {
+                goPage();
+            });
+            function goPage() {
+                var params = '{$params}';
+                var url = CONTROLLER+"/index?"+params;
+                url += "&p="+$('#txt_page').val();
+                window.location.href = url;
+
+            }
+        });
+
+</script>

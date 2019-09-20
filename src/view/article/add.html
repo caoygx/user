@@ -1,0 +1,204 @@
+<script type="text/javascript" charset="utf-8" src="http://public.rrbrr.com/Plugin/ueditor-1.4.3.3/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="http://public.rrbrr.com/Plugin/ueditor-1.4.3.3/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="http://public.rrbrr.com/Plugin/ueditor-1.4.3.3/lang/zh-cn/zh-cn.js"></script>
+
+
+
+
+<form class="form-horizontal" role="form"  method="post" action="__URL__/save/">
+    <div class="form-group" style="display: none" >
+    <label for="id" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> ID</label>
+    <div class="col-sm-4">
+        <input  type="hidden"  class="form-control" name="id" id="id"  value="{$vo.id}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="cate_id" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 栏目</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="cate_id" type="text" id="cate_id" size="10" value="{$vo[cate_id] ? $vo[cate_id] : $_GET[cate_id]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="title" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 标题</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="title" type="text" id="title" size="30" value="{$vo[title] ? $vo[title] : $_GET[title]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="title_style" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 标题样式</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="title_style" type="text" id="title_style" size="30" value="{$vo[title_style] ? $vo[title_style] : $_GET[title_style]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="thumb" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 缩略图</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="thumb" type="text" id="thumb" size="30" value="{$vo[thumb] ? $vo[thumb] : $_GET[thumb]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="keywords" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 关键词</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="keywords" type="text" id="keywords" size="30" value="{$vo[keywords] ? $vo[keywords] : $_GET[keywords]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="description" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> SEO简介</label>
+    <div class="col-sm-4">
+        <textarea rows="5"   class="form-control" name="description"  id="description">{$vo.description}</textarea>
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="content" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 内容</label>
+    <div class="col-sm-4">
+        <textarea rows="5"   class="form-control" name="content"  id="content">{$vo.content}</textarea>
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="template" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 模板</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="template" type="text" id="template" size="30" value="{$vo[template] ? $vo[template] : $_GET[template]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="status" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 状态</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="status" type="text" id="status" size="10" value="{$vo[status] ? $vo[status] : $_GET[status]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="sort" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 排序</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="sort" type="text" id="sort" size="10" value="{$vo[sort] ? $vo[sort] : $_GET[sort]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="hits" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 点击次数</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="hits" type="text" id="hits" size="10" value="{$vo[hits] ? $vo[hits] : $_GET[hits]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="create_time" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 创建时间</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="create_time" type="text" id="create_time" size="10" value="{$vo[create_time] ? $vo[create_time] : $_GET[create_time]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="update_time" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 更新时间</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="update_time" type="text" id="update_time" size="10" value="{$vo[update_time] ? $vo[update_time] : $_GET[update_time]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="image" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 缩略图</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="image" type="text" id="image" size="30" value="{$vo[image] ? $vo[image] : $_GET[image]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="images" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 图片集</label>
+    <div class="col-sm-4">
+        <textarea rows="5"   class="form-control" name="images"  id="images">{$vo.images}</textarea>
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="download" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 文件下载</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="download" type="text" id="download" size="30" value="{$vo[download] ? $vo[download] : $_GET[download]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="author" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 作者</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="author" type="text" id="author" size="30" value="{$vo[author] ? $vo[author] : $_GET[author]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="source" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 来源</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="source" type="text" id="source" size="30" value="{$vo[source] ? $vo[source] : $_GET[source]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="summary" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> 摘要</label>
+    <div class="col-sm-4">
+        <textarea rows="5"   class="form-control" name="summary"  id="summary">{$vo.summary}</textarea>
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+<div class="form-group" style="" >
+    <label for="tags" class="col-sm-2 control-label"><?php if(!empty($required)){ ?><span
+            class="text-danger">*</span><?php } ?> TAG</label>
+    <div class="col-sm-4">
+        <input  class="form-control" name="tags" type="text" id="tags" size="30" value="{$vo[tags] ? $vo[tags] : $_GET[tags]}" />
+    </div>
+    <div class="col-sm-2 control-label " style="text-align: left;"><span class="Validform_checktip"></span></div>
+
+</div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-info">保存</button>
+        </div>
+    </div>
+</form>

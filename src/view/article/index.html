@@ -1,0 +1,217 @@
+
+
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div data-original-title="" class="box-header well"><!-- <i class="icon-user"></i> <a href="add" class=""></a>{$pageTitle}--></div>
+        <div class="box-content">
+            <form method='get' action="{:url('index')}"  class="form-inline">
+                  <div class="form-group" >
+    <label for="id"> ID</label>
+    
+       <input  class="form-control" name="id" type="text" id="id" size="10" value="{$vo[id] ? $vo[id] : $_GET[id]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="cate_id"> 栏目</label>
+    
+       <input  class="form-control" name="cate_id" type="text" id="cate_id" size="10" value="{$vo[cate_id] ? $vo[cate_id] : $_GET[cate_id]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="title"> 标题</label>
+    
+       <input  class="form-control" name="title" type="text" id="title" size="30" value="{$vo[title] ? $vo[title] : $_GET[title]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="title_style"> 标题样式</label>
+    
+       <input  class="form-control" name="title_style" type="text" id="title_style" size="30" value="{$vo[title_style] ? $vo[title_style] : $_GET[title_style]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="thumb"> 缩略图</label>
+    
+       <input  class="form-control" name="thumb" type="text" id="thumb" size="30" value="{$vo[thumb] ? $vo[thumb] : $_GET[thumb]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="keywords"> 关键词</label>
+    
+       <input  class="form-control" name="keywords" type="text" id="keywords" size="30" value="{$vo[keywords] ? $vo[keywords] : $_GET[keywords]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="description"> SEO简介</label>
+    
+       <textarea rows="5"   class="form-control" name="description"  id="description">{$vo.description}</textarea>
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="content"> 内容</label>
+    
+       <textarea rows="5"   class="form-control" name="content"  id="content">{$vo.content}</textarea>
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="template"> 模板</label>
+    
+       <input  class="form-control" name="template" type="text" id="template" size="30" value="{$vo[template] ? $vo[template] : $_GET[template]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="status"> 状态</label>
+    
+       <input  class="form-control" name="status" type="text" id="status" size="10" value="{$vo[status] ? $vo[status] : $_GET[status]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="sort"> 排序</label>
+    
+       <input  class="form-control" name="sort" type="text" id="sort" size="10" value="{$vo[sort] ? $vo[sort] : $_GET[sort]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="hits"> 点击次数</label>
+    
+       <input  class="form-control" name="hits" type="text" id="hits" size="10" value="{$vo[hits] ? $vo[hits] : $_GET[hits]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="create_time"> 创建时间</label>
+    
+       <input  class="form-control" name="create_time" type="text" id="create_time" size="10" value="{$vo[create_time] ? $vo[create_time] : $_GET[create_time]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="update_time"> 更新时间</label>
+    
+       <input  class="form-control" name="update_time" type="text" id="update_time" size="10" value="{$vo[update_time] ? $vo[update_time] : $_GET[update_time]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="image"> 缩略图</label>
+    
+       <input  class="form-control" name="image" type="text" id="image" size="30" value="{$vo[image] ? $vo[image] : $_GET[image]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="images"> 图片集</label>
+    
+       <textarea rows="5"   class="form-control" name="images"  id="images">{$vo.images}</textarea>
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="download"> 文件下载</label>
+    
+       <input  class="form-control" name="download" type="text" id="download" size="30" value="{$vo[download] ? $vo[download] : $_GET[download]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="author"> 作者</label>
+    
+       <input  class="form-control" name="author" type="text" id="author" size="30" value="{$vo[author] ? $vo[author] : $_GET[author]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="source"> 来源</label>
+    
+       <input  class="form-control" name="source" type="text" id="source" size="30" value="{$vo[source] ? $vo[source] : $_GET[source]}" />
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="summary"> 摘要</label>
+    
+       <textarea rows="5"   class="form-control" name="summary"  id="summary">{$vo.summary}</textarea>
+       </div>
+   
+
+  <div class="form-group" >
+    <label for="tags"> TAG</label>
+    
+       <input  class="form-control" name="tags" type="text" id="tags" size="30" value="{$vo[tags] ? $vo[tags] : $_GET[tags]}" />
+       </div>
+   
+
+
+		      <button type="submit" class="btn btn-primary">搜索</button>
+		    </form>
+            <br />
+            <php>  $query = strstr($_SERVER["REQUEST_URI"],'?');    </php>
+
+            <php>if(1==1){</php>
+            <a href="{:url('add')}" type="button" class="btn btn-warning">添加</a>
+            <php>}</php>
+
+
+            <php>if(1==1){</php>
+            <a href="{:url('exportExcel')}" type="button" class="btn btn-warning">导出</a>
+            <php>}</php>
+
+
+           <!-- show="id:编号|8%,title:名称:edit,create_time|toDate='y-m-d':创建时间,status|getStatus2:状态,{$fields}"-->
+            <html:list id="checkList" name="vo" style="table table-striped table-bordered bootstrap-datatable datatable" checkbox="true" action="true"  datasource="list" show="id:ID::sort,cate_id:栏目::sort,title:标题::sort,title_style:标题样式::sort,thumb:缩略图::sort,keywords:关键词::sort,description:SEO简介::sort,content:内容::sort,template:模板::sort,status:状态::sort,sort:排序::sort,hits:点击次数::sort,create_time:创建时间::sort,update_time:更新时间::sort,image:缩略图::sort,images:图片集::sort,download:文件下载::sort,author:作者::sort,source:来源::sort,summary:摘要::sort,tags:TAG::sort" actionlist="edit:编辑:id,article_del:删除:id"/>
+            <div>
+                <php>if(0==1){</php>
+                <a href="javascript:;" onclick="del();" class="btn btn-info"> 批量禁用</a>
+                <php>}</php>
+
+                <php>if(0==1){</php>
+                <a href="javascript:;" onclick="foreverdel();" class="btn btn-danger"> 批量删除</a>
+                <php>}</php>
+            </div>
+            <div class="container text-center">
+                {$page}
+                <div style="margin-top:10px;">跳转到<input type="text" style="width: 100px;" id="txt_page" name="txt_page" >页 <input id="btn_jump" type="button" value="跳转"></div>
+                </div>
+ 
+        </div>
+    </div>
+
+</div>
+
+<script src="__PUBLIC__/common/Article.js"></script>
+
+<script>
+    <php>
+        $params = input('get.');
+        unset($params['p']);
+        $params = http_build_query($params);
+    </php>
+
+        $(function () {
+            console.log(URL);
+
+            $('#btn_jump').click(function () {
+                goPage();
+            });
+            function goPage() {
+                var params = '{$params}';
+                var url = CONTROLLER+"/index?"+params;
+                url += "&p="+$('#txt_page').val();
+                window.location.href = url;
+
+            }
+        });
+
+</script>

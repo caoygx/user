@@ -1,0 +1,66 @@
+<head> 
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+      <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrom=1">  
+    </head> 
+    <body> 
+     <button id="MM-button"></button>
+     <script src="https://pay.woop-woop.cn:41102/payment/js/cps-checkout.js"></script> 
+     
+        <script type="text/javascript">
+            totalPrice=1;
+        MMPay.Button.render({
+           env: 'sandbox', // Optional: specify 'sandbox' environment
+           payment: function () {
+
+               if (null == totalPrice || totalPrice <= 0)// Determine whether to select the purchased goods.
+               {
+                   alert("Payment amount must be greater than zero.");
+                   return;
+               }
+               //The merchant can customize parameters to be transferred as required.
+               var data = 
+               {
+                   env: this.evn,
+                   totalPrice: totalPrice
+               };
+                var CREATE_URL = 'http://www.tp6.com/index/create';
+                   return MMPay.payment.create(CREATE_URL, data)
+                        .then(function(res){
+                                  return res.paymentID;
+                         });
+           },
+ 
+           onAuthorize: function (data) {
+                   var EXECUTE_URL = 'https://10.93.49.141:8443/portal-service-demo/biz_pgw/demo/checkout/api/payment/execute'
+                var data =
+                {
+                    env: this.env,
+                         paymentID: data.paymentID,
+                         payerID: data.payerID,
+                         couponID: data.couponID 
+                };
+ 
+               // Make a call to your server to execute the payment
+               return MMPay.payment.execute(EXECUTE_URL, data)
+                     .then(function (res) {
+
+                           //window.location.href = "https://10.61.36.177:8443/portal-service-demo/success.jsp?paymentID="+res.paymentID;
+                });
+            },
+
+            onError:function(data)
+            {
+                  window.location.href = "https://10.93.49.141:8443/portal-service-demo/failure.jsp"; // Page to which a merchant wants to jump after a transaction fails.
+            },
+
+            onCancel:function(data)
+            {
+                  window.location.href = "https://10.93.49.141:8443/portal-service-demo/";// Page to which a merchant wants to jump after a transaction is canceled.
+            }
+
+        }, 'MM-button');
+        </script>
+        
+        </body>
+        </html>
+    
