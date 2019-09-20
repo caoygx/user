@@ -1,5 +1,5 @@
 <?php
-namespace app\controller;
+namespace mapp\controller;
 
 
 
@@ -12,6 +12,7 @@ class User
      * @Route("register/:name")
      */
     function index(){
-        return view();
+        echo 'sb';
+        //return view();
     }
 }
