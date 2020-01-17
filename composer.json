@@ -10,10 +10,10 @@
     ],
     "license": "Apache-2.0",
     "require": {
-    	"topthink/framework": "6.0.x-dev"
+    	"topthink/framework": "6.0.x"
     },
     "require-dev": {
-        "topthink/think": "6.0.x-dev"
+        "topthink/think": "6.0.x"
     },
     "autoload": {
         "psr-4": {
@@ -34,5 +34,7 @@
                 "user\\TauthzService"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
