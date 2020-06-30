@@ -51,14 +51,11 @@ class UserService extends Service
      */
     public function boot()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/tauthz.php', 'tauthz');
+        $this->mergeConfigFrom(__DIR__ . '/../config/user.php', 'user');
 
-        // 设置 Casbin Logger
-        if ($logger = $this->app->config->get("tauthz.log.logger")){            
-            Log::setLogger(new $logger($this->app->log));
-        }
 
-        $this->commands(['tauthz:publish' => Publish::class]);
+
+        $this->commands(['user:publish' => Publish::class]);
     }
 
     /**
