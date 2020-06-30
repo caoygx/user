@@ -87,22 +87,22 @@ class CreateRulesTable extends Migrator
      */
     public function up()
     {
-        $default = config('tauthz.default');
+        $default = config('user.default');
         $table = $this->table(config('tauthz.enforcers.'.$default.'.database.rules_name'));
-        $table->addColumn('ptype', 'string', ['null' => true])
-            ->addColumn('v0', 'string', ['null' => true])
-            ->addColumn('v1', 'string', ['null' => true])
-            ->addColumn('v2', 'string', ['null' => true])
-            ->addColumn('v3', 'string', ['null' => true])
-            ->addColumn('v4', 'string', ['null' => true])
-            ->addColumn('v5', 'string', ['null' => true])
+        $table->addColumn('username', 'string', ['null' => true])
+            ->addColumn('password', 'string', ['null' => true])
+            ->addColumn('mobile', 'string', ['null' => true])
+            ->addColumn('email', 'string', ['null' => true])
+            ->addColumn('ip', 'string', ['null' => true])
+            ->addColumn('source', 'string', ['null' => true])
+            ->addColumn('create_time', 'string', ['null' => true])
             ->create();
     }
 
     public function down()
     {
-        $default = config('tauthz.default');
-        $table = $this->table(config('tauthz.enforcers.'.$default.'.database.rules_name'));
+        $default = config('user.default');
+        $table = $this->table(config('user.enforcers.'.$default.'.database.rules_name'));
         $table->drop();
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace tauthz\command;
+namespace user\command;
 
 use think\console\Command;
 use think\console\Input;
@@ -16,7 +16,7 @@ class Publish extends Command
      */
     protected function configure()
     {
-        $this->setName('tauthz:publish')->setDescription('Publish Tauthz');
+        $this->setName('user:publish')->setDescription('Publish User');
     }
 
     /**
@@ -37,7 +37,7 @@ class Publish extends Command
         $handle = dir($source);
         
         while($entry=$handle->read()) {   
-            if(($entry!=".")&&($entry!="..")){   
+            if(($entry!=".")&&($entry!="..")){
                 if(is_file($source.$entry)){
                     copy($source.$entry, $destination.$entry);   
                 }

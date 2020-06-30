@@ -1,5 +1,5 @@
 <?php
-namespace tauthz;
+namespace mapp;
 
 use Casbin\Enforcer;
 use Casbin\Model\Model;
@@ -12,7 +12,7 @@ use tauthz\command\Publish;
  * 
  * @author techlee@qq.com
  */
-class TauthzService extends Service
+class UserService extends Service
 {
     /**
      * Register service

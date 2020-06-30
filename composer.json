@@ -10,7 +10,8 @@
     ],
     "license": "Apache-2.0",
     "require": {
-    	"topthink/framework": "6.0.x"
+    	"topthink/framework": "6.0.x",
+        "topthink/think-migration": "^3.0"
     },
     "require-dev": {
         "topthink/think": "6.0.x"
@@ -31,7 +32,7 @@
     "extra": {
         "think": {
             "services": [
-                "user\\TauthzService"
+                "mapp\\UserService"
             ]
         }
     },
