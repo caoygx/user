@@ -20,7 +20,8 @@ class User
             //redirect('/');
             echo '{"code":1,"msg":"设置更新成功","data":"","url":"http:\/\/www.yzncms.com\/admin\/config\/setting\/menuid\/13.html","wait":3}';
         }else{
-            $dir = "../../../vendor/rrbrr/user/src/admin/view";
+            $viewRoot = "../../";
+            $dir = $viewRoot."vendor/rrbrr/user/src/admin/view";
             return view($dir.'/user/index');
         }
     }
