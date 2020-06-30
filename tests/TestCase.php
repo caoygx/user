@@ -1,11 +1,11 @@
 <?php
 
-namespace tauthz\tests;
+namespace mapp\tests;
 
 use think\App;
 use PHPUnit\Framework\TestCase as BaseTestCase;
-use tauthz\TauthzService;
-use tauthz\model\Rule;
+use mapp\UserService;
+use mapp\model\Rule;
 
 class TestCase extends BaseTestCase{
 
@@ -18,11 +18,11 @@ class TestCase extends BaseTestCase{
         // 应用初始化
         $app = new App(__DIR__.'/../vendor/topthink/think/');        
 
-        $app->register(TauthzService::class);
+        $app->register(UserService::class);
 
         $app->initialize();
 
-        $app->console->call("tauthz:publish");
+        $app->console->call("user:publish");
         
         return $app;
     }

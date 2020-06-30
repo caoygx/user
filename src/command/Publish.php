@@ -44,12 +44,8 @@ class Publish extends Command
             }
         }
 
-        if (!file_exists(config_path().'tauthz-rbac-model.conf')) {
-            copy(__DIR__.'/../../config/tauthz-rbac-model.conf', config_path().'tauthz-rbac-model.conf');
-        }
-
-        if (!file_exists(config_path().'tauthz.php')) {
-            copy(__DIR__.'/../../config/tauthz.php', config_path().'tauthz.php');
+        if (!file_exists(config_path().'user.php')) {
+            copy(__DIR__.'/../../config/user.php', config_path().'user.php');
         }
     }
 }

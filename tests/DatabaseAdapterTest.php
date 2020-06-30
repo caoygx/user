@@ -1,8 +1,8 @@
 <?php
 
-namespace tauthz\tests;
+namespace user\tests;
 
-use tauthz\facade\Enforcer;
+use user\facade\Enforcer;
 
 class DatabaseAdapterTest extends TestCase
 {

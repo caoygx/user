@@ -5,10 +5,10 @@ use Casbin\Enforcer;
 use Casbin\Model\Model;
 use Casbin\Log\Log;
 use think\Service;
-use tauthz\command\Publish;
+use mapp\command\Publish;
 
 /**
- * Tauthz service
+ * mapp service
  * 
  * @author techlee@qq.com
  */
@@ -26,9 +26,9 @@ class UserService extends Service
         
         // 绑定 Casbin决策器
         $this->app->bind('enforcer', function () {
-            $default = $this->app->config->get("tauthz.default");
+            $default = $this->app->config->get("user.default");
             
-            $config = $this->app->config->get("tauthz.enforcers.".$default);
+            $config = $this->app->config->get("user.enforcers.".$default);
             $adapter = $config['adapter'];
             
             $configType = $config['model']['config_type'];
@@ -40,7 +40,7 @@ class UserService extends Service
                 $model->loadModel($config['model']['config_text']);
             }
             
-            return new Enforcer($model, app($adapter), $this->app->config->get("tauthz.log.enabled", false));
+            return new Enforcer($model, app($adapter), $this->app->config->get("user.log.enabled", false));
         });
     }
 

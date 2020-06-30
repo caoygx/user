@@ -1,6 +1,6 @@
 <?php
 
-namespace tauthz;
+namespace mapp;
 
 use Casbin\Log\Logger as LoggerContract;
 use Psr\Log\LoggerInterface;

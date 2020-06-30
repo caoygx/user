@@ -29,7 +29,7 @@ class CreateRulesTable extends Migrator
      */
     protected function getDbConfig(): array
     {
-        $default = config('tauthz.database.connection') ?: config('database.default');
+        $default = config('user.database.connection') ?: config('database.default');
 
         $config = config("database.connections.{$default}");
 
@@ -88,7 +88,7 @@ class CreateRulesTable extends Migrator
     public function up()
     {
         $default = config('user.default');
-        $table = $this->table(config('tauthz.enforcers.'.$default.'.database.rules_name'));
+        $table = $this->table(config('user.enforcers.'.$default.'.database.rules_name'));
         $table->addColumn('username', 'string', ['null' => true])
             ->addColumn('password', 'string', ['null' => true])
             ->addColumn('mobile', 'string', ['null' => true])

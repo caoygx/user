@@ -1,8 +1,8 @@
 <?php
 
-namespace tauthz\adapter;
+namespace mapp\adapter;
 
-use tauthz\model\Rule;
+use mapp\model\Rule;
 use Casbin\Persist\Adapter;
 use Casbin\Persist\AdapterHelper;
 

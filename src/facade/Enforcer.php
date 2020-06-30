@@ -1,6 +1,6 @@
 <?php
 
-namespace tauthz\facade;
+namespace mapp\facade;
 
 use think\Facade;
 

@@ -1,7 +1,7 @@
 <?php
 return [
     /*
-     *Default Tauthz enforcer
+     *Default user enforcer
      */
     'default' => 'basic',
 

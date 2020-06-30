@@ -1,9 +1,9 @@
 <?php
 
-namespace tauthz\Tests;
+namespace user\Tests;
 
 use Mockery;
-use tauthz\Logger;
+use mapp\Logger;
 
 class LoggerTest extends TestCase
 {
