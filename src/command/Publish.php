@@ -1,6 +1,6 @@
 <?php
 
-namespace user\command;
+namespace mapp\command;
 
 use think\console\Command;
 use think\console\Input;
