@@ -4,9 +4,7 @@ namespace mapp\facade;
 
 use think\Facade;
 
-/**
- * @see \Casbin\Enforcer
- */
+
 class Enforcer extends Facade
 {
     /**

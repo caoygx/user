@@ -33,4 +33,5 @@ return [
             ],
         ],
     ],
+    'template_root_dir' => "../../vendor/rrbrr/user/src/user/view" //模板根目录
 ];
