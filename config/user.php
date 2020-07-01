@@ -29,10 +29,7 @@ return [
             'database' => [
                 // 数据库连接名称，不填为默认配置.
                 'connection' => '',
-                // 策略表名（不含表前缀）
-                'rules_name' => 'rules',
-                // 策略表完整名称.
-                'rules_table' => null,
+                'table_name' => 'user', //用户名表
             ],
         ],
     ],
