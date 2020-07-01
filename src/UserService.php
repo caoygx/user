@@ -1,9 +1,6 @@
 <?php
 namespace mapp;
 
-use Casbin\Enforcer;
-use Casbin\Model\Model;
-use Casbin\Log\Log;
 use think\Service;
 use mapp\command\Publish;
 
@@ -24,23 +21,8 @@ class UserService extends Service
         // 注册数据迁移服务
         $this->app->register(\think\migration\Service::class);
         
-        // 绑定 Casbin决策器
-        $this->app->bind('enforcer', function () {
-            $default = $this->app->config->get("user.default");
-            
-            $config = $this->app->config->get("user.enforcers.".$default);
-            $adapter = $config['adapter'];
-            
-            $configType = $config['model']['config_type'];
-            
-            $model = new Model();
-            if ('file' == $configType) {
-                $model->loadModel($config['model']['config_file_path']);
-            } elseif ('text' == $configType) {
-                $model->loadModel($config['model']['config_text']);
-            }
-            
-            return new Enforcer($model, app($adapter), $this->app->config->get("user.log.enabled", false));
+        $this->app->bind('userModel', function () {
+            return "userModel";
         });
     }
 

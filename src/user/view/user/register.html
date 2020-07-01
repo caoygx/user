@@ -1,107 +1,318 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>用户注册</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>浅言·闺蜜约惠拼</title>
+    <!--防止IE进入怪异模式-->
+    <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- <link href="https://public.21mmm.com/pc/css/rest.css" type="text/css" rel="stylesheet" />
+     <link rel="stylesheet" type="text/css" href="https://public.21mmm.com/pc/css/style.css" />
+     <link rel="stylesheet" type="text/css" href="https://public.21mmm.com/pc/css/layout.css" />-->
+    <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="https://public.21mmm.com/pc/js/jquery1.42.min.js"></script>-->
+    <script type="text/javascript" src="https://public.21mmm.com/pc/js/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="https://public.21mmm.com/pc/js/base.js"></script>
 
-    <link rel="icon" href="https://qyapp.zhuoyoutech.com/test/img/favicon.ico">
-
-    <link rel="stylesheet" href="http://qy.uzipm.com/addons/ewei_shopv2/template/account/default/css/account.css">
-
-    <link rel="stylesheet" type="text/css" href="http://qy.uzipm.com/addons/ewei_shopv2/static/js/dist/foxui/css/foxui.min.css?v=0.2">
-    <link rel="stylesheet" type="text/css" href="http://qy.uzipm.com/addons/ewei_shopv2/template/mobile/default/static/css/style.css?v=1569486568">
-
-
-    <link rel="stylesheet" type="text/css" href="http://qy.uzipm.com/addons/ewei_shopv2/static/fonts/iconfont.css?v=2017070719">
-
-
-
-
-    <script src="http://qy.uzipm.com/app/resource/js/lib/jquery-1.11.1.min.js"></script>
-    <script src='//res.wx.qq.com/open/js/jweixin-1.3.0.js'></script>
-    <!--   <script src="http://qy.uzipm.com/addons/ewei_shopv2/static/js/dist/foxui/js/foxui.min.js"></script>-->
-    <script src="http://qy.uzipm.com/addons/ewei_shopv2/static/js/require.js"></script>
-    <script src="http://qy.uzipm.com/addons/ewei_shopv2/static/js/myconfig-app.js"></script>
-    <script language="javascript">
-        require(['core'],function(modal){modal.init({siteUrl: "http://qy.uzipm.com/",baseUrl: "./index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=ROUTES"})});
-        $(function () {
-            $('img').on('error', function () {
-                console.log($(this));
-                $(this).css({
-                    'background-image': 'http://qy.uzipm.com/addons/ewei_shopv2/static/'
-                })
-            })
-        })
-    </script>
-
+    <link rel="stylesheet" type="text/css" href="https://public.21mmm.com/pc/css/rest.css" /><link rel="stylesheet" type="text/css" href="https://public.21mmm.com/pc/css/style.css" /><link rel="stylesheet" type="text/css" href="https://public.21mmm.com/pc/css/layout.css" />
 </head>
 
-<body>
-<div class="qy_account">
-    <img class="qy_account-title" src="http://qy.uzipm.com/addons/ewei_shopv2/template/account/default/images/img_qianyan.png" alt="">
+<body class="paging_all_bg">
+<!--header-->
+<div class="paging_header header_top">
+    <div class="w1200 header_content_three header_content">
 
-    <div class="qy_account-outter">
-        <form action="" method="post">
-        <section class="reg-mobile">
-            <div class="sp-fixed">
-                <span class="icon-phone"></span>
-            </div>
-            <input type="tel" autocomplete="off" required maxlength="11"
-                   oninput="if(value.length>11)value=value.slice(0,11)" ref="phone" class="ipt-long" id="mobile" name="mobile"
-                   placeholder="请输入手机号码" />
-        </section>
-        <section class="reg-mobile reg-three reg-pwd">
-            <section class="code-len">
-                <div class="sp-fixed">
-                    <span class="icon-phone icon-pwd"></span>
+
+        <!--            <div class="search">
+                        <input type="text" placeholder="请输入搜索关键字" />
+                        <a href=""></a>
+                    </div>-->
+
+        <div class="logo">
+            <h1>
+                <a href="https://www.21mmm.com"></a>
+                logo
+            </h1>
+            <span>
+				<small>&nbsp;&nbsp;</small>
+				<strong> <a href="http://api.pop800.com/web800/c.do?l=cn&type=1&n=299636&w=0" target="_blank">
+在线咨询
+            </a></strong>
+			</span>
+        </div>
+
+        <div class="search">
+            <form action="https://www.21mmm.com/course/index" target="_self" >
+                <input type="text" id="kw" name="kw" placeholder="请输入搜索关键字" />
+                <input type="submit" value="" />
+
+            </form>
+        </div>
+
+        <div class="domain">
+            <!--<a class="icon1 white_color" href="https://u.21mmm.com">课程发布</a>-->
+            <a class="icon2 white_color" href="https://u.21mmm.com">我的课程</a>
+            <a class="icon3 white_color" href="https://u.21mmm.com">消息</a>
+
+
+
+            <span id="UserBar">
+    <a class="icon4 white_color" href="https://u.21mmm.com/public/login" target="_self">登录</a>
+    <a class="icon5 white_color" href="https://u.21mmm.com/public/register" target="_self">注册</a>
+    </span>
+        </div>
+
+
+
+    </div>
+</div>
+
+</div>
+<!--End-->
+
+<div class="w1200">
+    <div class="jiaru">
+            <span class="fr">
+                        <em>还没有米米账号吗？</em>
+                        <a href="https://u.21mmm.com/public/register" title="立即加入">立即加入</a>
+                    </span>
+    </div>
+    <div class="quick_logon">
+        <div class="quick_logon_con">
+            <div class="fl quick_logon_left">
+                <h2>登录米米</h2>
+                <ul class="clearfix quick_logon_tab">
+                    <li data-class="tel_logon"  class="on">
+                        <a href="JavaScript:;" title="">验证码登录</a>
+                    </li>
+
+                    <li data-class="ordinary">
+                        <a href="JavaScript:;" title="">密码登录</a>
+                    </li>
+
+                </ul>
+
+                <!-- 手机快速登录 -->
+                <div class="tel_logon"  >
+                    <form  id="fLogin" method="post"  action="/Public/mobileLogin">
+                        <input type="hidden" name="source"   value="">
+                        <input id="mobile" name="mobile" class="tel" type="text" placeholder="在此输入手机号" value="" />
+                        <div class="dongtai">
+                            <input id="code" name="code" type="text" placeholder="在此输入验证码" value="" />
+                            <label id="btn_get_code">获取验证码</label>
+                        </div>
+                        <input type="submit" value="登录" class="logon" id="m_login">
+                    </form>
+
+                    <div class="other">
+                        <div class="other_icon" style="text-align: center;">
+                            <a href=" https://open.weixin.qq.com/connect/qrconnect?appid=wxa4b29435136e7169&redirect_uri=https://u.21mmm.com/public/wxLoginCallback&response_type=code&scope=snsapi_login&state=f4c0132527f440724757f0043ac11d29" title="">
+                                <img src="https://public.21mmm.com/u/images/quick_logon_wx.png" alt=""><br />
+                                使用微信登录
+                            </a>
+                            <!-- <a href="" title="">
+                                 <img src="https://public.21mmm.com/u/images/quick_logon_17.png" alt="">
+                             </a>
+                             <a href="" title="">
+                                 <img src="https://public.21mmm.com/u/images/quick_logon_23.png" alt="">
+                             </a>-->
+                        </div>
+                    </div>
+
                 </div>
-                <input type="password" required maxlength="16" minlength="6" ref="password" class="ipt-long"
-                       id="pwd" name="pwd" placeholder="请输入您的密码" />
-            </section>
-            <span onclick=" Verify.changeVisible()" class="btn-pwd"></span>
-        </section>
 
 
-        <!--<section class="qy-text qy-forget">
-            <a href="./index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=account.forget&backurl=aT0yJmM9ZW50cnkmbT1ld2VpX3Nob3B2MiZkbz1tb2JpbGUmcj1tZW1iZXI%253D">忘记密码</a>
-        </section>-->
+                <!-- 普通登录 -->
+                <div class="ordinary" style="display:none;">
+                    <form id="fOrdinary" method="post"  action="/Public/handerLogin">
 
-            <input type="submit" value="立即登录" class="btn-go" >
 
-        <section class="qy-text">
-            <a href="./index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=account.register&backurl=aT0yJmM9ZW50cnkmbT1ld2VpX3Nob3B2MiZkbz1tb2JpbGUmcj1tZW1iZXI%253D">还没有账号，立即注册</a>
-        </section>
+                        <input id="username" name="username" type="text" class="user_icon" placeholder="用户名或手机号" />
+                        <div class="psd">
+                            <input id="password" name="password" type="password" placeholder="密码" />
+                            <!--<a href="" title="">忘记了密码？</a>-->
+                        </div>
+                        <input type="submit" value="登录" class="logon">
+                    </form>
+                    <!--三方登录-->
+                    <!--<div class="other">
+                        <div class="other_icon">
+                            <a href="#" title="">
+                                <img src="https://public.21mmm.com/u/images/quick_logon_20.png" alt="">
+                            </a>
+                            <a href="" title="">
+                                <img src="https://public.21mmm.com/u/images/quick_logon_17.png" alt="">
+                            </a>
+                            <a href="" title="">
+                                <img src="https://public.21mmm.com/u/images/quick_logon_23.png" alt="">
+                            </a>
+                        </div>
+                    </div>-->
+                </div>
 
-        </form>
 
+            </div>
+            <div class="fr quick_logon_right">
+                <div class="quick_logon_video">
+                    <iframe style="    width: 400px;    height: 420px;    border: 0;" src=" https://open.weixin.qq.com/connect/qrconnect?appid=wxa4b29435136e7169&redirect_uri=https://u.21mmm.com/public/wxLoginCallback&response_type=code&scope=snsapi_login&state=f4c0132527f440724757f0043ac11d29"></iframe>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
 
-<div class="new__banner">
-    <div class="new__banner_inner" onclick="open_app()">
-        <img src="https://qycdn.zhuoyoutech.com/h5/sypp/img/qy-last-logo.jpg" class="icon-logo" alt />
-        <h1>总有一个地方属于你</h1>
-        <img src="http://qy.uzipm.com/addons/ewei_shopv2/template/account/default/images/icon_download.png" class="download" onclick="open_app()" alt />
+<script type="text/javascript" src="https://public.21mmm.com/common.js"></script>
+<script>
+
+    $('#btn_get_code').click(function () {
+        var url = '/public/getCode';
+        var param = {};
+        param['mobile'] = $('#mobile').val();
+        get(url,param,function (data) {
+            if(checkCode(data)){
+                alert('验证码已发送成功，请在手机上查收');
+                console.log(data);
+            }
+        });
+    });
+
+	var current_show = "tel_logon";
+	$('.quick_logon_tab li').click(function () {
+        $(".quick_logon_tab li").removeClass("on");
+		$(this).addClass('on');
+
+		$("."+current_show).hide();
+        var targetClass = $(this).data('class');
+        current_show = targetClass;
+        $("."+targetClass).show();
+	});
+
+</script>
+
+
+
+
+
+
+<!--正文结束-->
+
+</div> <!-- md-10 -->
+</div> <!-- row -->
+</div> <!--container-->
+
+
+
+
+
+<!--footer-->
+<div class="container-fluid page_footer w100 ">
+    <div  class=" container">
+        <div class="w1200 row">
+
+            <div class="logo col-md-5">
+                <div class="lo">
+                    <a href=""></a>
+                </div>
+                <p>
+                    与优秀讲师、专业机构、院校合作，为您提供海量优质课程，以及创新的在线
+                    学习体验，帮助您获得全新的个人发展和能力提升。与优秀讲师、专业机构、
+                    院校合作，为您提供海量优质课程，以及创新的在线学习体验，帮助您获得全
+                </p>
+            </div>
+
+            <div class="summary  col-md-5">
+                <ul class="one">
+                    <li><a target="_blank" href="https://www.21mmm.com/company/howSelect">如何选课</a></li>
+                    <li><a target="_blank" href="https://www.21mmm.com/company/contact">客服中心</a></li>
+                    <li><a target="_blank" href="https://www.21mmm.com/company/studyPeriod">课程有效期</a></li>
+                    <li><a target="_blank" href="https://www.21mmm.com/company/training">企业团购培训</a></li>
+                </ul>
+                <ul class="two">
+                    <li><a target="_blank" href="https://www.21mmm.com/company/aboutUs">关于我们</a></li>
+                    <li><a target="_blank" href="https://www.21mmm.com/company/joinUs">诚聘英才 </a></li>
+                    <li><a target="_blank" href="https://www.21mmm.com/company/legalNotice">法律声明 </a></li>
+                    <li class="alone"><a target="_blank" href="https://www.21mmm.com/company/agreement">视频上传协议</a></li>
+                </ul>
+            </div>
+
+            <div class="code  col-md-2">
+                <img width="145" src="https://public.21mmm.com/weixin_344.jpg"/>
+                <!--<img width="145" src="https://public.21mmm.com/weixin_service.jpg"/>-->
+                <div style="margin-top: 6px;color: #fff;font-weight: bold;">
+                    扫码关注微信公众号
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
 
-<script language='javascript'>
-    require(['biz/member/account'], function (modal) {
-        modal.initLogin({backurl:'http://qy.uzipm.com/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=member'});
+<!--footer end-->
+
+<!--
+<script type="text/javascript" src="//qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="205255" data-redirecturi="https://u.21mmm.com/Login/qq_callback" charset="utf-8"></script>
+<script>
+    QC.Login({
+        btnId:"qqLoginBtn",
+        size: "A_M" //A_XL| A_L| A_M| A_S|  B_M| B_S| C_S
     });
 </script>
+-->
+
+<script>
+    $('#kw').val('');
+    $('#opt').val('');
 
 
-<script src="https://qyapp.zhuoyoutech.com/h5/handnote/js/util.js?ver=8.2" type="text/javascript" charset="utf-8">
+    $(document).bind('click',function(e){
+        var e = e || window.event;
+        var elem = e.target || e.srcElement;
+        while (elem) {
+            if (elem.className && elem.className.indexOf('dialog')>-1) {
+                return;
+            }
+            elem = elem.parentNode;
+        }
+        // $('#all_surname').css('display','none');
+    });
+
+
+   /* url = "https://u.21mmm.com/User/detail?callback=?";
+    $.getJSON(url,function(data){
+        var data = data.data;
+        if(data.id){
+            userinfo = data;
+            //alert(data);
+            var userBar = ' <a class=" white_color" href="https://u.21mmm.com">欢迎：'+data.nickname+'</a>'+
+                '<a id="logout"  class="icon4 white_color" href="https://u.21mmm.com/public/logout" target="_self">退出</a>';
+            document.getElementById("UserBar").innerHTML = userBar;
+            //$('#logout').on('click',logout);
+        }
+    });
+
+    function logout(){
+        url = "https://u.21mmm.com/Login/logout?callback=?";
+        $.getJSON(url,function(data){
+            window.location.reload();
+        });
+    }*/
+
 </script>
-<script src="http://qy.uzipm.com/addons/ewei_shopv2/template/account/default/js/verify.js"></script>
 
 
-<script>var imgs = document.getElementsByTagName('img');for(var i=0, len=imgs.length; i < len; i++){imgs[i].onerror = function() {if (!this.getAttribute('check-src') && (this.src.indexOf('http://') > -1 || this.src.indexOf('https://') > -1)) {this.src = this.src.indexOf('http://qy.uzipm.com/attachment/') == -1 ? this.src.replace('http://uzipm-qy-img.oss-cn-hangzhou.aliyuncs.com/', 'http://qy.uzipm.com/attachment/') : this.src.replace('http://qy.uzipm.com/attachment/', 'http://uzipm-qy-img.oss-cn-hangzhou.aliyuncs.com/');this.setAttribute('check-src', true);}}}</script></body>
 
+
+
+
+
+</body>
 </html>
