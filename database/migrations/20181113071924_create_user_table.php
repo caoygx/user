@@ -3,7 +3,7 @@
 use think\migration\Migrator;
 use Phinx\Db\Adapter\AdapterFactory;
 
-class CreateRulesTable extends Migrator
+class CreateUserTable extends Migrator
 {
     /**
      * Initialize method.
