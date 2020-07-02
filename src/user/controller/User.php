@@ -5,7 +5,7 @@ namespace mapp\user\controller;
 use think\facade\Request;
 use think\facade\Db;
 
-class User
+class User extends BaseController
 {
     function register(){
         if(request()->isPost()){
