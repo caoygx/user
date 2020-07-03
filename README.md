@@ -42,3 +42,47 @@ php think migrate:run
 这将创建名为 `user` 的表。
 
 用户表名更改在config/user目录下
+
+# 使用方法
+创建app/controller/User.php文件
+```php
+namespace app\controller;
+use mapp\user\controller\User as CUser;
+
+class User 
+{
+
+    //登录
+    function login()
+    {
+        $cuser = new CUser($this->app);
+        $post = input();
+        $r =  $cuser->login($post);
+        return $r;
+    }
+
+    //注册
+    function register()
+    {
+        $cuser = new CUser($this->app);
+        $post = input();
+        $r =  $cuser->register($post);
+        return $r;
+    }
+
+    //获取验证码
+    function getCode()
+    {
+        $cuser = new CUser($this->app);
+        $post = input();
+        $r =  $cuser->getCode($post);
+        return $r;
+    }
+
+
+}
+```
+url访问测试
+http://localhost/user/login?username=test&password=xx&ret_format=json
+这样就相当于把所有请求全部转发给了composer中的user包来处理。如果其它项目也需要用户登录，只要引入这个包即可。
+如果把这些包能做成api,就相当于简单的微服务接口了。
