@@ -27,7 +27,4 @@ class User extends Model implements Arrayable
         }
     }
 
-    protected function autoSalt(){
-        return substr(uniqid(mt_rand()), 0, 4);
-    }
 }
