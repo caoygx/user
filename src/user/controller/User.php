@@ -4,12 +4,16 @@ namespace mapp\user\controller;
 
 
 use think\exception\ValidateException;
+use SingKa\Sms\SkSms;
+use think\facade\Config;
 
 class User extends BaseController
 {
-    function initialize(){
+    function initialize()
+    {
         $this->m = new \mapp\model\User();
     }
+
     function register2()
     {
         if (request()->isPost()) {
@@ -61,38 +65,56 @@ class User extends BaseController
 
     }
 
+    /**
+     * 登录
+     * @return \app\member
+     */
+    function loginByCode($params)
+    {
+        $mobile   = input('mobile');
+        $checkResult = $this->checkCodeForMobile();
+        if(!$checkResult){
+            return $this->error('验证码错误或过期');
+        }
+
+        $rUser    = $this->m->where(['mobile' => $mobile])->find();
+        $this->assign('userinfo', $rUser);
+        return $this->toview();
+
+    }
+
     function saveInfo()
     {
-        $data = [];
-        $data['nickname'] = I('nickname');
+        $data             = [];
+        $data['nickname'] = input('nickname');
 
         $id = $this->uid;
 
         //验证编辑保存权限
-        if(!empty($id)){
-            $rModel = $this->m->where([$this->m->getPk()=>$id])->find();
-            if(empty($rModel)) return $this->error('没有所有者权限');
+        if (!empty($id)) {
+            $rModel = $this->m->where([$this->m->getPk() => $id])->find();
+            if (empty($rModel)) return $this->error('没有所有者权限');
         }
 
         $r = $rModel->save($data);
 
-        if($r === false){
+        if ($r === false) {
             return $this->error();
         }
 
         $id = $this->m->id;
-        if(!empty($id)) $this->assign('id',$id);
+        if (!empty($id)) $this->assign('id', $id);
         return $this->toview();
 
     }
 
     public function switchOutlet()
     {
-        $outlet_id = I('outlet_id');
+        $outlet_id = input('outlet_id');
         /*$hasOutlet = Db::name('outletUserRel')->where(['uid'=>$this->uid,outlet_id=>$outlet_id])->find();
         if(empty($hasOutlet)) return $this->error();*/
-        $r = $this->m->where(['id'=>$this->uid])->update(['current_outlet_id'=>$outlet_id]);
-        if(empty($r)) return $this->error('切换失败');
+        $r = $this->m->where(['id' => $this->uid])->update(['current_outlet_id' => $outlet_id]);
+        if (empty($r)) return $this->error('切换失败');
         return $this->toview();
     }
 
@@ -101,18 +123,19 @@ class User extends BaseController
      * 检测手机验证码
      * @return mixed
      */
-    protected function checkCodeForMobile(){
-        $mobile = I('mobile');
-        $code   = I('code');
+    protected function checkCodeForMobile()
+    {
+        $mobile = input('mobile');
+        $code   = input('code');
 
-        $codeKeys = C('app.code_keys');
+        $codeKeys = config('sms.code_keys');
         $key      = $mobile . $codeKeys['login'];
 
         if (CONF_ENV == 'dev' || $code == date('ymd') || ($mobile == '12000000000' && $code = '123456')) {
             //不验证
         } else {
-            $cacheCode = S($key);
-            if ($code != $cacheCode) return $this->error('验证码错误或过期');
+            $cacheCode = cache($key);
+            if ($cacheCode == null || $code != $cacheCode) return false;
         }
 
         return true;
@@ -124,23 +147,24 @@ class User extends BaseController
      * 绑定手机
      * @return \app\member|array|\think\response\Json|\think\response\Jsonp
      */
-    function bindMobile(){
-        $mobile = I('mobile');
+    function bindMobile()
+    {
+        $mobile = input('mobile');
 
         $rUser = $this->checkCodeForMobile();
         if (empty($rUser)) return $this->error('用户不存在');
 
 
-        if(!empty($rUser['mobile'])){
+        if (!empty($rUser['mobile'])) {
             $this->error('已经绑定过手机了');
         }
 
-        $rMobile=$this->m->where(['mobile'=>$mobile])->find();
-        if(!empty($rMobile)){
+        $rMobile = $this->m->where(['mobile' => $mobile])->find();
+        if (!empty($rMobile)) {
             $this->error('手机已经被使用了,请更换手机');
         }
 
-        $this->m->where(['id'=>$rUser['uid']])->update(['mobile'=>$mobile]);
+        $this->m->where(['id' => $rUser['uid']])->update(['mobile' => $mobile]);
         return $this->toview();
     }
 
@@ -150,11 +174,11 @@ class User extends BaseController
      */
     function getCode()
     {
-        $mobile   = input('mobile');
-        $this->validate(input(),'\mapp\validate\code.mobile');
+        $mobile = input('mobile');
+        $this->validate(input(), '\mapp\validate\code.mobile');
 
-        $type     = input('type','register');
-        $codeKeys = config('app.code_keys');
+        $type     = input('type', 'register');
+        $codeKeys = config('sms.code_keys');
         $key      = $mobile . $codeKeys[$type];
         $code     = cache($key);
         if (empty($code)) {
@@ -162,20 +186,72 @@ class User extends BaseController
             cache($key, $code, config('sms_code_expire'));
         }
 
-        $d            = [];
-        $d['mobile']  = $mobile;
-        $d['content'] = $code;
-        $d['ip']      = get_client_ip();
-        $sms_id       = \think\facade\Db::name('SmsQueue')->insertGetId($d);
-        $r            = send_sms($mobile, $code, null, $sms_id);
+        $r = $this->sendSms($mobile, "register", ["code" => $code]);
 
-        if ($r === true) {
+        if ($r['code'] == 200) {
             return $this->toview('', '', "短信发送成功，请注意查收！ ");
         } else {
             return $this->error($r);
         }
     }
 
+    /**
+     * 短信发送示例
+     *
+     * @mobile  短信发送对象手机号码
+     * @action  短信发送场景，会自动传入短信模板
+     * @parme   短信内容数组
+     */
+    public function sendSms($mobile, $action, $parme)
+    {
+        $d            = [];
+        $d['mobile']  = $mobile;
+        $d['content'] = json_encode($parme);
+        $d['ip']      = $this->request->ip();
+        $smsId        = \think\facade\Db::name('SmsQueue')->insertGetId($d);
+
+        $SmsDefaultDriver = 'aliyun';
+        $config           = $this->SmsConfig ?: Config::get('sms.' . $SmsDefaultDriver);
+        $sms              = new sksms($SmsDefaultDriver, $config);//传入短信驱动和配置信息
+        if ($SmsDefaultDriver == 'aliyun') {
+            $result = $sms->$action($mobile, $parme);
+        } elseif ($SmsDefaultDriver == 'qiniu') {
+            $result = $sms->$action([$mobile], $parme);
+        } elseif ($SmsDefaultDriver == 'upyun') {
+            $result = $sms->$action($mobile, implode('|', $this->restoreArray($parme)));
+        } else {
+            $result = $sms->$action($mobile, $this->restoreArray($parme));
+        }
+        if ($result['code'] == 200) {
+            \think\facade\Db::name('SmsQueue')->where(['id' => $smsId])->update(['status' => 1]);
+            $data['code'] = 200;
+            $data['msg']  = '短信发送成功';
+        } else {
+            \think\facade\Db::name('SmsQueue')->where(['id' => $smsId])->update(['return_msg' => $result['msg']]);
+            $data['code'] = $result['code'];
+            $data['msg']  = $result['msg'];
+        }
+        return $data;
+    }
+
+    /**
+     * 数组主键序号化
+     *
+     * @arr  需要转换的数组
+     */
+    public function restoreArray($arr)
+    {
+        if (!is_array($arr)) {
+            return $arr;
+        }
+        $c   = 0;
+        $new = [];
+        foreach ($arr as $key => $value) {
+            $new[$c] = $value;
+            $c++;
+        }
+        return $new;
+    }
 
 
 }

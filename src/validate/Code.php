@@ -6,15 +6,9 @@ use think\Validate;
 
 class Code extends Validate
 {
-    /**
-     * 定义验证规则
-     * 格式：'字段名'	=>	['规则1','规则2'...]
-     *
-     * @var array
-     */
     protected $rule =   [
         'mobile'  => 'require|checkMobile:rule',
-        'code'   => 'require|max:6|checkCode:rule',
+        //'code'   => 'require|max:6|checkCode:rule',
     ];
     
     /**
@@ -49,6 +43,9 @@ class Code extends Validate
     }
 
     function checkMobile($value, $rule, $data=[]){
+
+        return true;
+
         $rUser = \think\facade\Db::name('User')->where(['mobile'=>$data['mobile']])->find();
         return !empty($rUser);
     }
