@@ -1,7 +1,7 @@
 {
-    "name": "rrbrr/user",
-    "keywords": ["thinkphp","user"],
-    "description": "user register, user login, sms code login ",
+    "name": "rrbrr/muser",
+    "keywords": ["thinkphp"],
+    "description": "user login,uesr register ",
     "authors": [
         {
             "name": "caoygx",
@@ -11,15 +11,14 @@
     "license": "Apache-2.0",
     "require": {
     	"topthink/framework": "6.0.x",
-        "topthink/think-migration": "^3.0",
-        "singka/singka-sms": "^1.6"
+        "topthink/think-migration": "^3.0"
     },
     "require-dev": {
         "topthink/think": "6.0.x"
     },
     "autoload": {
         "psr-4": {
-            "mapp\\": "src/"
+            "muser\\": "src/"
         }
     },
     "autoload-dev": {
@@ -33,7 +32,7 @@
     "extra": {
         "think": {
             "services": [
-                "mapp\\UserService"
+                "muser\\UserService"
             ]
         }
     },

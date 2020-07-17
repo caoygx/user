@@ -1,11 +1,11 @@
 <?php
 
-namespace mapp\tests;
+namespace muser\tests;
 
 use think\App;
 use PHPUnit\Framework\TestCase as BaseTestCase;
-use mapp\UserService;
-use mapp\model\Rule;
+use muser\UserService;
+use muser\model\Rule;
 
 class TestCase extends BaseTestCase{
 

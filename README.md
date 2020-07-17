@@ -20,7 +20,7 @@ composer require rrbrr/user
 return [
     // ...
 
-    mapp\UserService::class,
+    muser\UserService::class,
 ];
 ```
 
@@ -47,7 +47,7 @@ php think migrate:run
 创建app/controller/User.php文件
 ```php
 namespace app\controller;
-use mapp\user\controller\User as CUser;
+use muser\user\controller\User as CUser;
 
 class User 
 {
@@ -82,6 +82,7 @@ class User
 
 }
 ```
- url访问测试  http://localhost/user/login?username=test&password=xx&ret_format=json   
- 这样就相当于把所有请求全部转发给了composer中的user包来处理。如果其它项目也需要用户登录，只要引入这个包即可。  
- 如果把这些包能做成api,就相当于简单的微服务接口了。
+url访问测试
+http://localhost/user/login?username=test&password=xx&ret_format=json
+这样就相当于把所有请求全部转发给了composer中的user包来处理。如果其它项目也需要用户登录，只要引入这个包即可。
+如果把这些包能做成api,就相当于简单的微服务接口了。

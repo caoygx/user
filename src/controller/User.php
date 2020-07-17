@@ -1,8 +1,58 @@
 <?php
 
-namespace muser\service;
-class User
+namespace muser\controller;
+
+use Cgf\Framework\Thinkphp\BaseController;
+use think\exception\ValidateException;
+use SingKa\Sms\SkSms;
+use think\facade\Config;
+
+
+class User extends BaseController
 {
+    function getModelDir(){
+        return "\\muser\\model";
+    }
+    
+    function modifyMobile($post)
+    {
+        try {
+            $data = input();
+            $r    = validate('muser\validate\ModifyMobile')->check($data);
+            $this->m->update($data);
+            return $this->toview();
+        } catch (ValidateException $e) {
+            return $this->error($e->getError());
+        }
+    }
+
+    function modifyUsername($post)
+    {
+
+        try {
+            $data = input();
+            validate(\muser\validate\ModifyUsername::class)->check($data);
+            $this->m->update($data);
+            return $this->toview();
+        } catch (ValidateException $e) {
+            return $this->error($e->getError());
+        }
+
+    }
+
+    function modifyPassword($post)
+    {
+        try {
+            $data = input();
+            validate('muser\validate\ModifyPassword')->check($data);
+            $this->m->update($data);
+            return $this->toview();
+        } catch (ValidateException $e) {
+            return $this->error($e->getError());
+        }
+
+    }
+
     /**
      * 手机登录验证码登录
      */
@@ -17,13 +67,7 @@ class User
 
         try {
             $data = input();
-            validate('app\validate\OutletUser')->check($data);
-            /* $m = new \app\model\User();
-             $className = '\\app\\model\\User';
-             $m = new $className();
-             dump($m);*/
-            //dump($this->m);exit;
-            //$m->save($data);
+            validate(\muser\validate\User::class)->check($data);
             $this->m->save($data);
             $id = $this->m->id;
             $this->assign('id', $id);
@@ -31,39 +75,13 @@ class User
         } catch (ValidateException $e) {
             return $this->error($e->getError());
         }
-
-        /*$where['mobile'] = $mobile;
-        $u = $this->m->whereWidthFilterField($where)->find();
-        if(empty($u)){ //新用户注册
-            $d = [];
-            $d['mobile'] = $mobile;
-            $d['ip'] = get_client_ip();
-            $d['avatar'] = rand_avatar();
-            $d['source'] = $this->getSource();
-            //$id = $this->m->mobileAdd($d);
-            if(($id = $this->m->mobileAdd()) === false){
-                $this->error($this->m->getError());
-            }
-
-            $u = $this->m->find($id);
-            $u['is_new'] = '1';
-
-            $this->returnUserinfo($u);
-
-
-
-
-        }else{ //老用户登录
-            $this->returnUserinfo($u);
-        }*/
-
     }
 
     /**
      * 登录
      * @return \app\member
      */
-    function login($params)
+    function login()
     {
         $mobile   = input('mobile');
         $password = input('password');
@@ -107,7 +125,7 @@ class User
     {
         //try {
         $data     = input();
-        $validate = new \app\validate\Code();
+        $validate = new \muser\validate\Code();
         //$rCheck = validate('app\validate\Code')->check($data);
         $rCheck = $validate->check($data);
         if (!$rCheck) {
@@ -143,38 +161,18 @@ class User
             return $this->toview();
         }
 
-
         return $this->toview();
-        /*} catch (ValidateException $e) {
-
-        }*/
-        /*
-
-                $rUser = $this->m->where(['mobile' => $mobile])->find();
-                if (empty($rUser)) return $this->error('用户不存在');
-
-                $this->assign('userinfo', $rUser);
-                return $this->toview();*/
     }
 
     /**
      * 找回密码
      * @return \app\member|array|\think\response\Json|\think\response\Jsonp
      */
-    function findPassword()
+    function findPassword($post)
     {
-        try {
-            $data = input();
-            validate('app\validate\Code')->check($data);
-            $rUser = \think\facade\Db::name('OutletUser')->where(['mobile' => $data['mobile']])->find();
-            $this->m->where(['id' => $rUser['id']])->save(['password' => input('password')]);
-            return $this->toview();
-        } catch (ValidateException $e) {
-            return $this->error($e->getError());
-        }
+        return $this->modifyPassword($post);
 
     }
-
 
     /**
      * 获取注册登录的验证码
@@ -182,29 +180,82 @@ class User
     function getCode()
     {
         $mobile = input('mobile');
-        //$this->validate(input(),'\app\validate\code.mobile');
+        $this->validate(input(), '\mapp\validate\code.mobile');
 
         $type     = input('type', 'register');
-        $codeKeys = config('app.code_keys');
+        $codeKeys = config('sms.code_keys');
         $key      = $mobile . $codeKeys[$type];
-        $code     = '';//cache($key);
+        $code     = cache($key);
         if (empty($code)) {
             $code = mt_rand(1000, 9999);
             cache($key, $code, config('sms_code_expire'));
         }
 
-        $d            = [];
-        $d['mobile']  = $mobile;
-        $d['content'] = $code;
-        $d['ip']      = get_client_ip();
-        $sms_id       = M('SmsQueue')->insertGetId($d);
-        $r            = send_sms($mobile, $code, null, $sms_id);
+        $r = $this->sendSms($mobile, "register", ["code" => $code]);
 
-        if ($r === true) {
+        if ($r['code'] == 200) {
             return $this->toview('', '', "短信发送成功，请注意查收！ ");
         } else {
             return $this->error($r);
         }
+    }
+
+    /**
+     * 短信发送示例
+     *
+     * @mobile  短信发送对象手机号码
+     * @action  短信发送场景，会自动传入短信模板
+     * @parme   短信内容数组
+     */
+    public function sendSms($mobile, $action, $parme)
+    {
+        $d            = [];
+        $d['mobile']  = $mobile;
+        $d['content'] = json_encode($parme);
+        $d['ip']      = $this->request->ip();
+        $smsId        = \think\facade\Db::name('SmsQueue')->insertGetId($d);
+
+        $SmsDefaultDriver = 'aliyun';
+        $config           = $this->SmsConfig ?: Config::get('sms.' . $SmsDefaultDriver);
+        $sms              = new sksms($SmsDefaultDriver, $config);//传入短信驱动和配置信息
+        if ($SmsDefaultDriver == 'aliyun') {
+            $result = $sms->$action($mobile, $parme);
+        } elseif ($SmsDefaultDriver == 'qiniu') {
+            $result = $sms->$action([$mobile], $parme);
+        } elseif ($SmsDefaultDriver == 'upyun') {
+            $result = $sms->$action($mobile, implode('|', $this->restoreArray($parme)));
+        } else {
+            $result = $sms->$action($mobile, $this->restoreArray($parme));
+        }
+        if ($result['code'] == 200) {
+            \think\facade\Db::name('SmsQueue')->where(['id' => $smsId])->update(['status' => 1]);
+            $data['code'] = 200;
+            $data['msg']  = '短信发送成功';
+        } else {
+            \think\facade\Db::name('SmsQueue')->where(['id' => $smsId])->update(['return_msg' => $result['msg']]);
+            $data['code'] = $result['code'];
+            $data['msg']  = $result['msg'];
+        }
+        return $data;
+    }
+
+    /**
+     * 数组主键序号化
+     *
+     * @arr  需要转换的数组
+     */
+    public function restoreArray($arr)
+    {
+        if (!is_array($arr)) {
+            return $arr;
+        }
+        $c   = 0;
+        $new = [];
+        foreach ($arr as $key => $value) {
+            $new[$c] = $value;
+            $c++;
+        }
+        return $new;
     }
 
     /**
@@ -256,4 +307,5 @@ class User
         $this->assign('id', $id);
         return $this->toview();
     }
+
 }

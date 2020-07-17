@@ -1,6 +1,6 @@
 <?php
 
-namespace mapp\command;
+namespace muser\command;
 
 use think\console\Command;
 use think\console\Input;

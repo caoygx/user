@@ -1,6 +1,6 @@
 <?php
 
-namespace mapp\validate;
+namespace muser\validate;
 
 use think\Validate;
 

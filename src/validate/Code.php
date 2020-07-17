@@ -1,14 +1,20 @@
 <?php
 
-namespace mapp\validate;
+namespace muser\validate;
 
 use think\Validate;
 
 class Code extends Validate
 {
+    /**
+     * 定义验证规则
+     * 格式：'字段名'	=>	['规则1','规则2'...]
+     *
+     * @var array
+     */
     protected $rule =   [
         'mobile'  => 'require|checkMobile:rule',
-        //'code'   => 'require|max:6|checkCode:rule',
+        'code'   => 'require|max:6|checkCode:rule',
     ];
     
     /**
@@ -28,24 +34,21 @@ class Code extends Validate
         return true;
         $mobile = $data['mobile'];
         $code   = $data['code'];
-        $codeKeys = C('app.code_keys');
-        $key      = $mobile . $codeKeys['login'];
+        $codeKeys = config('app.code_keys');
+        $key      = $mobile . $codeKeys['login']; //如果是注册验证码，如何获取注册的缓存key
 
         if ($code == date('ymd') || ($mobile == '12000000000' && $code = '123456')) {
             //不验证
             return true;
 
         } else {
-            $cacheCode = S($key);
+            $cacheCode = cache($key);
             if ($code != $cacheCode) return false;
         }
         return true;
     }
 
     function checkMobile($value, $rule, $data=[]){
-
-        return true;
-
         $rUser = \think\facade\Db::name('User')->where(['mobile'=>$data['mobile']])->find();
         return !empty($rUser);
     }

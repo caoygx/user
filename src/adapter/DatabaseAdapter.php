@@ -1,6 +1,6 @@
 <?php
 
-namespace mapp\adapter;
+namespace muser\adapter;
 
 
 class DatabaseAdapter

@@ -1,11 +1,11 @@
 <?php
-namespace mapp;
+namespace muser;
 
 use think\Service;
-use mapp\command\Publish;
+use muser\command\Publish;
 
 /**
- * mapp service
+ * muser service
  * 
  * @author techlee@qq.com
  */
